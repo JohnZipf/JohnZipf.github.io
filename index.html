@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="John Zipf, electrical engineering student at Lehigh University. Zipper UAV, a twin-prop fixed wing designed with XFOIL, Ansys Fluent and XFLR5, and the tri-tiltrotor eVTOL build before it: flight firmware, telemetry, power electronics and airfoil CFD.">
+<meta property="og:title" content="John Zipf Engineering Portfolio">
+<meta property="og:description" content="Zipper UAV, a twin-prop fixed wing designed with XFOIL, Ansys Fluent and XFLR5, plus the tri-tiltrotor eVTOL build before it.">
+<title>John Zipf Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+img{max-width:100%}
+
+:root{
+  --paper:#F2F3F0; --surface:#FFFFFF; --ink:#15181B; --muted:#58606A; --rule:#D5D8D2;
+  --accent:#2446A8; --accent-soft:#E3E8F6; --shadow:0 1px 2px rgba(21,24,27,.06),0 8px 24px rgba(21,24,27,.06);
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101316; --surface:#181C20; --ink:#E6E9EC; --muted:#9AA3AD; --rule:#2B3137;
+    --accent:#93ABFF; --accent-soft:#1D2644; --shadow:none; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101316; --surface:#181C20; --ink:#E6E9EC; --muted:#9AA3AD; --rule:#2B3137;
+  --accent:#93ABFF; --accent-soft:#1D2644; --shadow:none; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:20px;padding-block:48px 72px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+p{margin:0}
+.label{font:500 12px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+figure{margin:0}
+img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--rule);background:var(--surface)}
+figcaption{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.45}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 32px;padding-bottom:28px;border-bottom:1px solid var(--rule)}
+.top h1{font-size:clamp(40px,7vw,64px);font-weight:800;font-stretch:112%;letter-spacing:-.01em}
+.top .who{margin-top:10px;color:var(--muted);max-width:44ch}
+.contact{display:grid;gap:6px;font:400 14px/1.4 var(--mono)}
+.contact .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.copy{font:500 12px/1 var(--mono);color:var(--accent);background:var(--accent-soft);border:0;border-radius:4px;padding:6px 9px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* project head */
+.proj{margin-top:48px}
+.proj h2{font-size:clamp(30px,5vw,46px);font-weight:750;font-stretch:88%;margin-top:10px}
+.lede{margin-top:14px;font-size:18px;max-width:62ch}
+.hero{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:24px;align-items:start}
+.spec{background:var(--surface);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow);padding:18px 20px}
+.spec dl{margin:12px 0 0;display:grid;grid-template-columns:auto 1fr;gap:9px 16px;font-size:14px}
+.spec dt{font:500 12px/1.6 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.spec dd{margin:0;font-variant-numeric:tabular-nums}
+
+/* build log */
+.section-h{margin-top:64px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:2px solid var(--ink);padding-top:14px}
+.section-h h3{font-size:24px;font-weight:700;font-stretch:95%}
+.log{list-style:none;margin:8px 0 0;padding:0;counter-reset:stage}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;padding-block:32px;border-bottom:1px solid var(--rule);align-items:start}
+.stage:last-child{border-bottom:0}
+.stage .txt{display:grid;gap:12px;align-content:start}
+.stage .n{font:500 13px/1 var(--mono);color:var(--accent)}
+.stage h4{margin:0;font:700 21px/1.2 var(--display);font-stretch:95%;text-wrap:balance}
+.stage p{max-width:60ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:400 12px/1 var(--mono);padding:5px 8px;border:1px solid var(--rule);border-radius:4px;color:var(--muted);background:var(--surface)}
+.fix{border-left:3px solid var(--accent);padding:2px 0 2px 12px;font-size:15px}
+.fix b{font-weight:600}
+.portrait img{max-height:560px;object-fit:cover;object-position:center 40%}
+
+/* cfd */
+.cfd-intro{margin-top:20px;max-width:64ch}
+.results{margin-top:24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.results div{background:var(--surface);padding:14px 16px;display:grid;gap:4px}
+.results .v{font:600 26px/1.1 var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.results .k{font-size:13px;color:var(--muted)}
+.cfd-grid{margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.cfd-grid .wide{grid-column:1/-1}
+
+/* also */
+.also{margin-top:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.also article{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;display:grid;gap:8px;align-content:start}
+.also h4{margin:0;font:700 18px/1.25 var(--display);font-stretch:95%}
+.also p{font-size:15px;color:var(--muted)}
+.also ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted)}
+
+/* phase 2 additions */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose{margin-top:20px;display:grid;gap:12px;max-width:66ch}
+.prose ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.tbl-wrap{margin-top:20px;overflow-x:auto;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.tbl th,.tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl thead th{font:500 12px/1.35 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--paper)}
+.tbl thead th .u{text-transform:none;letter-spacing:0}
+.tbl tbody th{font-weight:600}
+.tbl tbody tr:last-child th,.tbl tbody tr:last-child td{border-bottom:0}
+.tbl.num td{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tbl tr.pick th,.tbl tr.pick td{background:var(--accent-soft)}
+.tbl tr.pick th{color:var(--accent)}
+.stage.flip{border-bottom:0;padding-block:24px 0}
+.ticks{margin:0;padding-left:18px;display:grid;gap:8px;max-width:60ch}
+.goingon,.electronicsside{margin-top:14px;max-width:62ch;font-size:17px}
+.road{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:16px}
+.road>li{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;display:grid;gap:10px;min-width:0}
+.road-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.road-h h4{margin:0;font:700 19px/1.25 var(--display);font-stretch:95%;text-wrap:balance;flex:1 1 220px}
+.road-n{font:600 14px/1 var(--mono);color:var(--accent);border:1.5px solid var(--accent);border-radius:50%;width:30px;height:30px;display:grid;place-items:center;flex:none}
+.chip{font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;border-radius:4px;border:1px solid var(--rule);color:var(--muted);background:var(--paper)}
+.chip-now{color:var(--accent);background:var(--accent-soft);border-color:transparent}
+.road p{max-width:66ch}
+.road ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.zoom{display:block;cursor:zoom-in}
+.zoom:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+@media (max-width:760px){
+  .hero,.stage,.cfd-grid,.also{grid-template-columns:minmax(0,1fr)}
+  .results{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stage{gap:18px}
+  .portrait img{max-height:440px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="label">Electrical Engineering · Lehigh University</p>
+      <h1>John Zipf</h1>
+      <p class="who">EE student and NCAA Division I athlete. I build flight hardware: flight controllers, power distribution, telemetry links and the airframes they fly in.</p>
+    </div>
+    <div class="contact">
+      <div class="row"><span id="email">joz228@lehigh.edu</span><button class="copy" id="copy-email" type="button">Copy</button></div>
+      <div class="row"><a href="https://www.linkedin.com/in/john-zipf-41604a380/" target="_blank" rel="noopener">linkedin.com/in/john-zipf</a></div>
+    </div>
+  </header>
+
+  <section class="proj" aria-labelledby="zip-h">
+    <p class="label">Independent project · Phase 2 · Printing the test airframe</p>
+    <h2 id="zip-h">Zipper UAV: twin-prop fixed wing</h2>
+    <p class="lede"> I know most Inverted V-tail UAVs that match my model only use one propeller in the back of the fuselage, but I wanted to test this airframe and see if it would work and leave space for a payload to be deployed from the rear of the fuselage instead of inside. I haven't seen a UAV with this airframe with two props so I figured why not try it.</p>
+    <p class ="goingon">So transitioning from the first VTOL design to the second version of my UAV trades vertical takeoff for speed. It is a 1.8 m twin-boom airplane with two wing-mounted motors, an inverted-V tail and retractable gear, sized to cruise at 30 m/s. I re-ran the airfoil selection in XFOIL, checked the winner in Ansys Fluent, analyzed the whole aircraft in XFLR5, then modeled every part in Fusion 360. </p>
+    <p class="electronicsside"> Flight Controller wise I wanted to build everything from the ground up so I can better understand how to build/program flight controllers from scratch. It uses an STM32F411RE microcontroller that controls the IMU, barometer, servos, and the MAVLink telemetry. I wanted to emulate what a military ground control station is like so I built my own using C++ and control the drone using a USB joystick. </p>
+
+    
+    <div class="hero">
+      <figure>
+        <img src="img/cad-top.jpg" alt="Fusion 360 render of the Zipper UAV from above: straight 1.8 m wing, central pod, two motor nacelles with propeller disks, twin carbon booms and an inverted-V tail" width="1341" height="681">
+        <figcaption>Fusion 360 model from above: SD7037 wing, motor nacelles, twin booms and the inverted-V tail.</figcaption>
+      </figure>
+      <aside class="spec" aria-label="Zipper UAV specifications">
+        <p class="label">Spec sheet</p>
+        <dl>
+          <dt>Wingspan</dt><dd>1.8 m, aspect ratio 7.0</dd>
+          <dt>Wing</dt><dd>SD7037, 257 mm chord, 0.463 m²</dd>
+          <dt>Layout</dt><dd>Twin booms, inverted-V tail</dd>
+          <dt>Motors</dt><dd>2 × T-Motor AT3520 KV550, 6S</dd>
+          <dt>Props</dt><dd>APC 10×8E, counter-rotating</dd>
+          <dt>Speed</dt><dd>30 m/s cruise, about 38 m/s top (estimated)</dd>
+          <dt>Weight</dt><dd>4.5 kg design point, 5.4 kg in the detailed CAD</dd>
+          <dt>Stability</dt><dd>Neutral point 133 mm, CG 104 mm, 11% static margin</dd>
+          <dt>Gear</dt><dd>Electric retracts, steerable nose, 8 servo-driven doors</dd>
+          <dt>Surfaces</dt><dd>Flaperons, flaps and ruddervators</dd>
+          <dt>Build</dt><dd>Carbon parts molded from 3D-printed plugs; 102 STL files</dd>
+        </dl>
+      </aside>
+    </div>
+
+    <div class="section-h"><h3>From three tilting rotors to two fixed props</h3><span class="label">Why the design changed</span></div>
+    <div class="prose">
+      <p>Phase 1, further down this page, was a tri-tiltrotor built to take off vertically and loiter for an hour or more. When I changed the mission to speed, most of that design stopped paying for itself. A third motor, tilt servos and a hover-sized battery are dead weight once the wing carries the aircraft in cruise, so Phase 2 keeps two fixed motors on the wing and lands on wheels.</p>
+      <p>The faster mission also changes what the wing has to do. Lift grows with the square of airspeed, so at 30 m/s the wing needs a lift coefficient of only about 0.17 to hold up 4.5 kg, compared with about 1.05 for the old slow loiter. The old airfoil study optimized a regime the new aircraft never flies in, so I redid it from scratch.</p>
+      <p class="fix"><b>Check:</b> 4.5 kg × 9.81 = 44.5 N of weight. At 30 m/s the dynamic pressure is ½ × 1.225 × 30² = 551 Pa, so C<sub>L</sub> = 44.5 ÷ (551 × 0.463 m²) = 0.174. XFLR5's whole-aircraft model gives 0.174 at 30.07 m/s.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr">Phase 1 and Phase 2 compared</caption>
+        <thead><tr><th scope="col"></th><th scope="col">Phase 1: tri-tiltrotor</th><th scope="col">Phase 2: twin-prop fixed wing</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mission</th><td>Long endurance, vertical takeoff</td><td>Speed: 30 m/s cruise</td></tr>
+          <tr><th scope="row">Propulsion</th><td>3 tilting rotors, 4S</td><td>2 fixed tractor props on wing nacelles, 6S</td></tr>
+          <tr><th scope="row">Wing</th><td>1.5 m span</td><td>1.8 m span, AR 7, 257 mm chord</td></tr>
+          <tr><th scope="row">Airfoil design point</th><td>C<sub>L</sub> ≈ 1.05 at Re ≈ 80,000</td><td>C<sub>L</sub> ≈ 0.15 at Re ≈ 530,000</td></tr>
+          <tr><th scope="row">Tail</th><td>Inverted V on one boom</td><td>Inverted V on twin booms</td></tr>
+          <tr><th scope="row">Takeoff and landing</th><td>Vertical</td><td>Retractable tricycle gear, flaps</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-h"><h3>Airfoil re-selection in XFOIL</h3><span class="label">16 polars · Ncrit 9</span></div>
+    <div class="prose">
+      <p>I wrote a Python driver for XFOIL that runs each candidate through the four points of the mission: cruise (Re 530,000, flap reflexed −3°), dash (Re 700,000), and landing (Re 250,000) clean and with 10° of flap on a 75% chord hinge. Four sections made the shortlist: SD7037 (the old choice), MH 32, RG-15 and HQ/W 2.5/9. The script scores each on cruise drag (40%), flapped C<sub>L,max</sub> (30%), dash drag (15%) and how gently it stalls (15%), and penalizes any section too thin for the 14 mm spar.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl num">
+        <caption class="sr">XFOIL results for the four candidate airfoils</caption>
+        <thead><tr><th scope="col">Airfoil</th><th scope="col">t/c</th><th scope="col">C<sub>d</sub> cruise<br><span class="u">C<sub>L</sub> 0.15</span></th><th scope="col">C<sub>d</sub> dash<br><span class="u">C<sub>L</sub> 0.10</span></th><th scope="col">C<sub>L,max</sub><br><span class="u">10° flap</span></th><th scope="col">Lift lost<br><span class="u">2° past stall</span></th><th scope="col">Score</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">MH 32</th><td>8.7%</td><td>0.00589</td><td>0.00521</td><td>1.38</td><td>7.7%</td><td>0.66</td></tr>
+          <tr class="pick"><th scope="row">SD7037 ✓</th><td>9.2%</td><td>0.00612</td><td>0.00705</td><td>1.55</td><td>3.8%</td><td>0.61</td></tr>
+          <tr><th scope="row">RG-15</th><td>8.9%</td><td>0.00624</td><td>0.00553</td><td>1.39</td><td>8.4%</td><td>0.29</td></tr>
+          <tr><th scope="row">HQ/W 2.5/9</th><td>9.0%</td><td>0.00628</td><td>0.00588</td><td>1.43</td><td>18.5%</td><td>0.19</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p><b>Why SD7037 over the top score:</b> MH 32 won the weighted score almost entirely on dash drag. In cruise, where the aircraft spends its time, SD7037's drag is only 4% higher. In exchange it gives 12% more lift with flaps (1.55 against 1.38), stalls about 3° later, and loses half as much lift past the stall. For a 5 kg airplane landing on retracts, a slower and more forgiving landing was worth more than a faster dash. Its 9.2% thickness also leaves the most room for the spar.</p>
+      <p class="fix"><b>Check:</b> the cruise drag penalty is (0.00612 − 0.00589) × 551 Pa × 0.463 m² ≈ 0.06 N, about 2% of the 3.1 N the wing and tail make at cruise. The landing benefit is √(1.55 ÷ 1.38) ≈ 1.06, so about 6% slower approach speed with the same margin to stall.</p>
+    </div>
+    <div class="cfd-grid">
+      <figure class="wide">
+        <a class="zoom" href="img/xfoil-landing-flap.png" target="_blank" rel="noopener"><img src="img/xfoil-landing-flap.png" alt="XFOIL drag polar and lift curve at Re 250,000 with 10 degrees of flap: SD7037 reaches Cl 1.55 with a broad, rounded stall while MH 32, RG-15 and HQ/W 2.5/9 peak between 1.38 and 1.43 and drop off sooner" width="1650" height="675" loading="lazy"></a>
+        <figcaption>Landing with 10° of flap, Re 250,000. SD7037 (blue) reaches the highest lift and rounds over gently instead of dropping off.</figcaption>
+      </figure>
+      <figure class="wide">
+        <a class="zoom" href="img/xfoil-cruise.png" target="_blank" rel="noopener"><img src="img/xfoil-cruise.png" alt="XFOIL drag polar and lift curve at the cruise point, Re 530,000 with the flap reflexed 3 degrees; all four airfoils sit near Cd 0.006 at the dashed Cl 0.15 line" width="1650" height="675" loading="lazy"></a>
+        <figcaption>Cruise, Re 530,000, flap reflexed −3°. At the dashed C<sub>L</sub> 0.15 line all four sections sit within 7% of each other in drag.</figcaption>
+      </figure>
+    </div>
+
+    <div class="section-h"><h3>Checking the cruise point in Ansys Fluent</h3><span class="label">2D · Transition SST · Fluent 2026 R1</span></div>
+    <div class="prose">
+      <p>XFOIL is a fast panel method, so I checked SD7037 at the cruise point with a 2D RANS model: 257 mm chord at 30 m/s and −2° angle of attack. I used the Transition SST model so the solver predicts where the boundary layer turns turbulent instead of assuming it is turbulent everywhere. That model needs a very fine first cell at the wall. Wall y<sup>+</sup> peaked at 0.18 at the leading edge, well under the target of 1, and the mesh's orthogonal quality averaged 0.98 with a minimum of 0.39.</p>
+      <p>The residuals fell four to seven orders of magnitude, then settled into a regular oscillation instead of flattening out, and the lift coefficient oscillated with them (standard deviation 0.03 around a mean of 0.14). That pattern most likely comes from a laminar separation bubble that a steady solver can't hold still, so I averaged the last 500 iterations. The averaged drag came out about 11% above XFOIL's cruise prediction of 0.0061, which is close agreement for two very different methods.</p>
+    </div>
+    <div class="results" role="list">
+      <div role="listitem"><span class="v">528,000</span><span class="k">Reynolds number</span></div>
+      <div role="listitem"><span class="v">0.18</span><span class="k">Peak wall y<sup>+</sup></span></div>
+      <div role="listitem"><span class="v">0.14</span><span class="k">C<sub>l</sub>, averaged</span></div>
+      <div role="listitem"><span class="v">0.0068</span><span class="k">C<sub>d</sub>, averaged</span></div>
+    </div>
+    <div class="cfd-grid">
+      <figure>
+        <a class="zoom" href="img/fluent-residuals.jpg" target="_blank" rel="noopener"><img src="img/fluent-residuals.jpg" alt="Fluent scaled residuals for continuity, velocity, k, omega, intermittency and Re-theta over 1,500 iterations, dropping fast and then oscillating between 1e-3 and 1e-7" width="1400" height="714" loading="lazy"></a>
+        <figcaption>Scaled residuals over 1,500 iterations. They drop fast, then oscillate around a steady level.</figcaption>
+      </figure>
+      <figure>
+        <a class="zoom" href="img/fluent-yplus.jpg" target="_blank" rel="noopener"><img src="img/fluent-yplus.jpg" alt="Wall y-plus along the 0.257 m chord, peaking at about 0.18 at the leading edge and staying between 0.02 and 0.08 over the rest of the airfoil" width="1400" height="432" loading="lazy"></a>
+        <figcaption>Wall y<sup>+</sup> along the chord stays under 0.2, as the transition model requires.</figcaption>
+      </figure>
+    </div>
+
+    <div class="section-h"><h3>Whole-aircraft analysis in XFLR5</h3><span class="label">VLM2 · 10 lb design weight</span></div>
+    <div class="prose">
+      <p>Airfoil data alone says nothing about stability or how the wing and tail work together, so I built the aircraft in XFLR5: the 1.8 m wing and the inverted-V tail, each running on foil polars I generated from Re 40,000 to 800,000 (SD7037 for the wing, NACA 0009 for the tail). The vortex-lattice analysis at the 10 lb (4.54 kg) design weight answered three questions:</p>
+      <ul>
+        <li><b>Is it stable?</b> The neutral point sits 133 mm behind the wing's leading edge. With the CG at 107 mm, the static margin is (133 − 107) ÷ 257 = 10% of the chord. Pitching moment falls as angle of attack rises, and it crosses zero near 0.5°, so the aircraft trims right at its cruise attitude.</li>
+        <li><b>How efficient is cruise?</b> At 30 m/s and 0.5°: C<sub>L</sub> 0.174 and C<sub>D</sub> 0.0119, so L/D ≈ 14.6 for the wing and tail. Induced drag is only 0.0013 of that, because a fast airplane flies at low lift. Peak L/D is about 23 near 3°.</li>
+        <li><b>How slow can it fly?</b> At 9° with flaps up, C<sub>L</sub> = 0.92, which holds the design weight at 13.1 m/s.</li>
+      </ul>
+    </div>
+    <div class="results" role="list">
+      <div role="listitem"><span class="v">133 mm</span><span class="k">Neutral point</span></div>
+      <div role="listitem"><span class="v">10%</span><span class="k">Static margin (CG 107 mm)</span></div>
+      <div role="listitem"><span class="v">14.6</span><span class="k">L/D at 30 m/s, wing + tail</span></div>
+      <div role="listitem"><span class="v">≈ 23</span><span class="k">Peak L/D</span></div>
+    </div>
+    <div class="cfd-grid">
+      <figure>
+        <a class="zoom" href="img/xflr5-polars.jpg" target="_blank" rel="noopener"><img src="img/xflr5-polars.jpg" alt="XFLR5 plane polars: CL against CD, CL against alpha, Cm against alpha sloping downward through zero near 0.5 degrees, and CL/CD against alpha peaking near 23; the cruise operating point is marked in red" width="1215" height="1443" loading="lazy"></a>
+        <figcaption>Aircraft polars with the 30 m/s cruise point in red. Tap any plot to open it full size. The falling C<sub>m</sub> line (bottom left) shows static stability.</figcaption>
+      </figure>
+      <figure>
+        <a class="zoom" href="img/xflr5-span.jpg" target="_blank" rel="noopener"><img src="img/xflr5-span.jpg" alt="XFLR5 induced-angle distribution across the span for angles of attack from minus 4 to 10 degrees, with the geometry readout: span 1.8 m, area 0.463 square metres, aspect ratio 7.004, tail volume 0.498, neutral point 0.133 m" width="1400" height="1245" loading="lazy"></a>
+        <figcaption>Induced angle across the span from −4° to 10°, with the geometry readout. This early run used a placeholder CG, so its C<sub>m</sub> isn't the trimmed value.</figcaption>
+      </figure>
+    </div>
+
+    <div class="section-h"><h3>From the numbers to the airframe</h3><span class="label">Fusion 360</span></div>
+    <div class="stage flip">
+      <div class="txt">
+        <p>The CAD model carries each result into a physical part:</p>
+        <ul class="ticks">
+          <li><b>Chord and span:</b> 257 mm keeps the wing at Re ≈ 250,000 near landing speed, where SD7037's flapped lift was measured. A 1.8 m span gives aspect ratio 7 and the 0.463 m² area the XFLR5 model used.</li>
+          <li><b>Spar:</b> a 14 mm carbon tube runs through the airfoil's thickest point, which is 9.2% of the chord, or 23.6 mm deep.</li>
+          <li><b>Flaps and flaperons:</b> hinged at 75% chord, the same hinge line as the XFOIL flap runs.</li>
+          <li><b>Tail and booms:</b> sized for a tail volume of 0.50, which puts the neutral point at 133 mm.</li>
+          <li><b>Balance:</b> the detailed model weighs about 5.4 kg. Switching to stronger servos moved the CG back to 116 mm, so 197 g of nose ballast brings it to 104 mm, an 11% static margin.</li>
+          <li><b>Gear:</b> electric retracts with servo-driven doors keep the wheels out of the airflow at 30 m/s.</li>
+        </ul>
+        <p class="fix"><b>Check:</b> stall speed scales with the square root of weight, so the heavier build flies its 9° flaps-up point at 13.1 × √(5.4 ÷ 4.54) ≈ 14.3 m/s. That is still under the 15.5 m/s landing speed the airfoil study planned for.</p>
+        <div class="tags"><span>XFOIL</span><span>Python</span><span>Ansys Fluent</span><span>XFLR5</span><span>Fusion 360</span><span>Weight and balance</span></div>
+      </div>
+      <figure>
+        <img src="img/cad-bottom.jpg" alt="Fusion 360 render of the Zipper UAV from below with the landing gear down, the battery hatch open, servo covers under the wing and tail, and the twin booms" width="1357" height="760" loading="lazy">
+        <figcaption>Underside with the gear down and the battery hatch open.</figcaption>
+      </figure>
+    </div>
+
+    <div class="section-h"><h3>Build progress</h3><span class="label">October 2026</span></div>
+    <div class="stage flip">
+      <div class="txt">
+        <p>The airframe is now coming off the 3D printer in sections. The right wing is almost complete: its panels are printed and laid out to check that they join cleanly before anything is glued or molded.</p>
+        <p>Each panel's open end shows the 14 mm spar hole and the alignment-pin holes that key neighboring panels together, so a misaligned joint shows up here in plastic instead of later in carbon.</p>
+        <div class="tags"><span>3D printing</span><span>Fit check</span><span>Assembly</span></div>
+      </div>
+      <figure>
+        <img src="img/print-fitcheck.jpg" alt="3D-printed right-wing panels in black and white plastic laid out on a couch, with the spar and alignment-pin holes visible on the open panel ends and a servo with its twisted lead resting on the wing" width="1400" height="717" loading="lazy">
+        <figcaption>Printed right-wing panels laid out for a fit check, with one of the servos.</figcaption>
+      </figure>
+    </div>
+
+    <div class="section-h"><h3>What's next</h3><span class="label">In order of work</span></div>
+    <ol class="road">
+      <li>
+        <div class="road-h"><span class="road-n">1</span><h4>Print the full airframe and dry-fit it</h4><span class="chip chip-now">In progress</span></div>
+        <p>Print every part of the airframe from the 102 STL files and assemble it without glue: wing panels, pod, nacelles, booms and tail. Catching a bad fit in printed plastic costs an afternoon; catching it after the molds are made costs a mold.</p>
+        <ul>
+          <li>Spar alignment across every wing joint</li>
+          <li>Wing-to-pod bolts, boom clamps and tail mounting</li>
+          <li>Hinge lines, servo pockets and gear bays</li>
+        </ul>
+      </li>
+      <li>
+        <div class="road-h"><span class="road-n">2</span><h4>Order the remaining servos and linkages</h4><span class="chip">Next</span></div>
+        <p>Buy the rest of the 15 servos and the hardware that connects them to the control surfaces and landing gear: four wing servos for the flaperons and flaps, three for the ruddervators and nose steering, and eight for the gear doors.</p>
+        <ul>
+          <li>2 mm pushrods, M2 ball links and clevises, G10 control horns</li>
+          <li>Wire pushrods for the gear doors</li>
+          <li>Pull-pull cables for nose-wheel steering</li>
+        </ul>
+      </li>
+      <li>
+        <div class="road-h"><span class="road-n">3</span><h4>Finish the flight controller and electronics</h4><span class="chip">Next</span></div>
+        <p>Finalize the custom STM32F411RE flight-controller PCB so it fits the space in the nose and fuselage, and buy the sensors and electronics this aircraft needs: an altimeter, magnetometer, ESC, airspeed sensor, GPS and FPV camera.</p>
+        <p>Then reprogram the firmware for the new layout. With two motors out on the wing, the controller can steer with thrust: speeding up one motor and slowing the other turns the nose without any control surface. That helps most at low speed and on the ground, when there is little airflow over the tail. The firmware also needs more servo outputs for the flaps, the gear doors and the retracts themselves.</p>
+        <p class="fix"><b>Check:</b> the motors sit about 0.31 m either side of the centerline. Moving 1 N of thrust from one motor to the other, about 5% of each motor's 20.6 N static thrust, gives 2 × 1 N × 0.31 m ≈ 0.6 N·m of yaw moment.</p>
+      </li>
+      <li>
+        <div class="road-h"><span class="road-n">4</span><h4>Plan the carbon fiber molds</h4><span class="chip">Planned</span></div>
+        <p>Work out how to turn the printed parts into molds for the carbon airframe. The current plan:</p>
+        <ul>
+          <li>Seal the printed plugs with epoxy, prime and wet-sand them smooth</li>
+          <li>Split each plug on MDF parting boards and build fiberglass molds with a tooling gelcoat surface</li>
+          <li>Vacuum-bag the carbon parts: 3K twill and a light second ply, with a core in the pod and nacelle shells</li>
+          <li>Build the wing first as a hot-wired foam core with a carbon skin, then move to a molded shell after testing</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section class="proj" aria-labelledby="uav-h">
+    <p class="label">Independent project · Phase 1 · First concept</p>
+    <h2 id="uav-h">Tri-tiltrotor eVTOL UAV</h2>
+    <p class="lede">A fixed-wing drone built for 1 to 1.5 hour flights that takes off and lands vertically. Three rotors tilt from hover to forward flight. I designed the concept, wrote the flight firmware on an STM32, soldered the flight controller and power board, built a ground station, and ran CFD to choose the airfoil.</p>
+
+    <div class="hero">
+      <figure>
+        <img src="img/field-test.jpg" alt="The tiltrotor UAV on a test stand on a turf field while John runs it from a laptop ground station and flight stick" width="1179" height="830">
+        <figcaption>Outdoor test, running the aircraft from the ground station and flight stick.</figcaption>
+      </figure>
+      <aside class="spec" aria-label="Aircraft specifications">
+        <p class="label">Spec sheet</p>
+        <dl>
+          <dt>Wingspan</dt><dd>1.5 m</dd>
+          <dt>Weight</dt><dd>Under 3 lb (target)</dd>
+          <dt>Battery</dt><dd>4S LiPo, 6000 mAh</dd>
+          <dt>Props</dt><dd>10 in</dd>
+          <dt>Endurance</dt><dd>1 to 1.5 h (target)</dd>
+          <dt>Layout</dt><dd>3 tilting rotors, inverted-V tail on a single boom</dd>
+          <dt>Flight ctrl</dt><dd>STM32 Nucleo, custom C firmware</dd>
+          <dt>IMU</dt><dd>MPU-6050 over I²C</dd>
+          <dt>Actuators</dt><dd>Servo PWM, 1000–2000 µs</dd>
+          <dt>Telemetry</dt><dd>LR900 radio, MAVLink, 10 ms update</dd>
+          <dt>Airframe</dt><dd>Carbon fiber tube, 3D-printed tilt mounts</dd>
+          <dt>Ground</dt><dd>Custom HUD, Xbox controller input</dd>
+        </dl>
+      </aside>
+    </div>
+
+    <div class="section-h"><h3>Build log</h3><span class="label">In order of work</span></div>
+    <ol class="log">
+      <li class="stage">
+        <div class="txt">
+          <span class="n">Stage 1</span>
+          <h4>Concept and system architecture</h4>
+          <p>The aircraft started on a whiteboard: a 1.5 m wing with two tilting rotors, a third rotor at the tail, and an inverted-V tail on a single boom. The same sketch lays out the ground link, from the RF transceiver to a laptop ground station with a HUD, an Xbox controller for input, and a video monitor for a camera added later.</p>
+          <p>The next revision added a new test stand and new arms that house the servos for rotor tilt.</p>
+          <div class="tags"><span>System design</span><span>Tiltrotor layout</span><span>GCS architecture</span></div>
+        </div>
+        <figure>
+          <img src="img/whiteboard.jpg" alt="Whiteboard sketch of the three-rotor tiltrotor UAV, test stand, and ground control station block diagram that I drew in my dorm, February 2026." width="1400" height="1080" loading="lazy">
+          <figcaption>Top view, test stand and ground-station block diagram.</figcaption>
+        </figure>
+      </li>
+
+      <li class="stage">
+        <div class="txt">
+          <span class="n">Stage 2</span>
+          <h4>Telemetry over MAVLink</h4>
+          <p>Getting the flight controller and ground station to talk over the LR900 radios took a lot of trial and error. The firmware sends a telemetry packet every 10 ms over UART to the radio, and the ground station decodes it as MAVLink.</p>
+          <p class="fix"><b>Debugging:</b> early runs printed garbled bytes on the serial console and the MPU-6050 answered its WHO_AM_I register with 0x00, which meant the I²C read was failing before any flight data could be trusted.</p>
+          <div class="tags"><span>C</span><span>STM32CubeIDE</span><span>UART</span><span>I²C</span><span>MAVLink</span></div>
+        </div>
+        <figure>
+          <img src="img/telemetry.jpg" alt="PuTTY serial console showing garbled output and WHOAMI = 0x00 above STM32 firmware defining the MPU-6050 address, servo limits and telemetry period" width="1100" height="1080" loading="lazy">
+          <figcaption>Serial console during bring-up, with the firmware's IMU address, servo limits and telemetry period below.</figcaption>
+        </figure>
+      </li>
+
+      <li class="stage">
+        <div class="txt">
+          <span class="n">Stage 3</span>
+          <h4>Flight controller and power distribution</h4>
+          <p>I hand-soldered the flight controller board and the power distribution board that feeds the motor ESCs, then brought the system up on the lab bench. An Xbox controller, read by the ground station, set motor speed so I could test the whole chain from stick to prop.</p>
+          <p>The same firmware runs the hover PID loop, with integral and output limits to keep the motors in a safe range.</p>
+          <div class="tags"><span>Soldering</span><span>Power distribution</span><span>ESCs</span><span>PID control</span><span>Bench test</span></div>
+        </div>
+        <figure>
+          <img src="img/bench.jpg" alt="Lab bench with a laptop running STM32 firmware, a Nucleo board, motors held in helping hands, servos and an Xbox controller" width="1400" height="1033" loading="lazy">
+          <figcaption>Bench bring-up: Nucleo, motors, servos and the Xbox controller input.</figcaption>
+        </figure>
+      </li>
+
+      <li class="stage">
+        <div class="txt">
+          <span class="n">Stage 4</span>
+          <h4>First carbon fiber airframe</h4>
+          <p>The first airframe uses carbon fiber tubes with 3D-printed mounts that hold the motors and the tilt servos. All the electronics from the bench, including the flight controller, power board and radio, moved onto the frame.</p>
+          <p>The ground station HUD shows attitude, throttle in microseconds, hover mode status, flight time and airspeed, all live over the telemetry link.</p>
+          <div class="tags"><span>Carbon fiber</span><span>3D printing</span><span>Wiring harness</span><span>HUD</span></div>
+        </div>
+        <figure class="portrait">
+          <img src="img/airframe.jpg" alt="Carbon fiber airframe with blue 3D-printed motor and servo mounts, wired electronics, and a laptop showing the ground station attitude indicator" width="1000" height="1264" loading="lazy">
+          <figcaption>First airframe, with the ground station HUD running on the laptop.</figcaption>
+        </figure>
+      </li>
+    </ol>
+
+    <div class="section-h"><h3>Airfoil selection with CFD (Phase 1)</h3><span class="label">Ansys Fluent 2026 R1</span></div>
+    <p class="cfd-intro">I simulated candidate airfoils in 2D with a steady, pressure-based solver and the SST k-ω turbulence model, then compared lift and drag coefficients. An early run threw negative-k warnings in thousands of cells. After fixing the setup, the final run converged cleanly, with residuals falling more than five orders of magnitude and both coefficients holding flat.</p>
+
+    <div class="results" role="list">
+      <div role="listitem"><span class="v">1.438</span><span class="k">Lift coefficient, C<sub>l</sub></span></div>
+      <div role="listitem"><span class="v">0.0984</span><span class="k">Drag coefficient, C<sub>d</sub></span></div>
+      <div role="listitem"><span class="v">14.6</span><span class="k">Lift-to-drag ratio</span></div>
+      <div role="listitem"><span class="v">8.62 m/s</span><span class="k">Peak flow speed</span></div>
+    </div>
+
+    <div class="cfd-grid">
+      <figure class="wide">
+        <img src="img/cfd-flow.jpg" alt="Ansys Fluent velocity vectors and contours around the selected airfoil, showing faster flow over the upper surface and a thin wake" width="1463" height="642" loading="lazy">
+        <figcaption>Velocity field around the selected airfoil.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/cfd-pressure.jpg" alt="Static pressure contour: high pressure at the leading edge and low pressure over the upper surface" width="1400" height="738" loading="lazy">
+        <figcaption>Static pressure. Suction over the upper surface is where the lift comes from.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/cfd-residuals.jpg" alt="Scaled residuals for continuity, x-velocity, y-velocity, k and omega dropping from about 1 to between 1e-6 and 1e-10 over 155 iterations" width="1400" height="673" loading="lazy">
+        <figcaption>Scaled residuals over 155 iterations.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="also-h">
+    <div class="section-h"><h3 id="also-h">Other experience</h3></div>
+    <div class="also">
+      <article>
+        <p class="label">Lehigh rocket club</p>
+        <h4>Liquid rocket motor test stand</h4>
+        <p>Helped set up the transducers and load cell on the club's liquid rocket motor test stand, with some work on the DATAQ DI-2108 data acquisition unit.</p>
+      </article>
+      <article>
+        <p class="label">Internship · PennPak Solutions</p>
+        <h4>Control systems engineering intern</h4>
+        <ul>
+          <li>Built an AI chatbot in Copilot Studio that finds SOPs, machine manuals and documents on the company server, and alerts maintenance and management when a part runs low.</li>
+          <li>Wired industrial equipment and control panels from schematics.</li>
+          <li>Drew the schematic for production-room door alarms, then installed and programmed them with the senior controls engineer.</li>
+          <li>Helped maintenance diagnose and repair the plant's HVAC system and filtration sensors.</li>
+          <li>On my own time, wired an Allen-Bradley Micro830 PLC and wrote ladder logic to learn fault handling, HMI design and PID control.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer>Photos and screenshots are from my own work. Reach me at <span>joz228@lehigh.edu</span>.</footer>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('copy-email'), txt=document.getElementById('email');
+  btn.addEventListener('click',function(){
+    function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1600)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(txt);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected'}
+    try{navigator.clipboard.writeText(txt.textContent).then(done,fallback)}catch(e){fallback()}
+  });
+})();
+</script>
+</body>
+</html>
